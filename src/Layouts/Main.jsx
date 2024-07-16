@@ -1,20 +1,20 @@
-// import { Outlet } from 'react-router-dom'
-// import Navbar from '../Components/Shared/Navbar/Navbar'
-// import Footer from '../Components/Shared/Footer/Footer'
-// import Navbars from '../Components/Shared/Navbar/Navbars'
-import Navbar from '../Shared/Navbar/Navbar'
-import Sidebar from '../Pages/Sidebar/Sidebar'
+import { useEffect, useState } from 'react';
+import Navbar from '../Shared/Navbar/Navbar';
+import Home from '../Pages/Home/Home';
+import Dashboard from './Dashboard';
+import { Outlet } from 'react-router-dom';
+
 const Main = () => {
+
+
   return (
     <div>
       <Navbar />
-      <Sidebar/>
-      {/* <div className='pt-24 min-h-[calc(100vh-68px)]'>
-        <Outlet />
-      </div> */}
-      {/* <Footer /> */}
+       {/* <Home /> */}
+        <Dashboard />
+        <Outlet></Outlet>
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

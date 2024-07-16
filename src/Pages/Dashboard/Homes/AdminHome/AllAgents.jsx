@@ -1,11 +1,11 @@
 // import React from 'react';
 
-const Home = () => {
+const AllAgents = () => {
     return (
         <div>
-            <h1>Hello Please Login</h1>
+            All Agents
         </div>
     );
 };
 
-export default Home;
+export default AllAgents;

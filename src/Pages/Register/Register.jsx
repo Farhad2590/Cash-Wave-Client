@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png"
 import toast from 'react-hot-toast'
 import useAxios from "../../hooks/useAxios";
+import { useState } from "react";
 
 
 const Register = () => {
     const axiosUrl = useAxios()
+    const [uses, setUses] = useState("user-pending");
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = e.target;
 
         const email = formData.email.value;
-        const role = formData.role.value;
+        // const role = formData.role.value;
         const phone_number = formData.phone_number.value;
         const password = formData.password.value;
 
@@ -28,18 +30,22 @@ const Register = () => {
             return;
         }
 
+        console.log(uses);
+        // if(uses === '')
+
         const userInfo = {
-            email, role, phone_number, password
+            email, uses, phone_number, password
         }
         axiosUrl.post('/user', userInfo)
             .then(res => {
                 if (res.data.insertedId) {
                     console.log('user added to the database')
                     // reset();
-                    toast.success('User created successfully')
-                   
+                    toast.success(`${uses} created successfully`)
+
                 }
             })
+        console.log(userInfo);
 
         // console.log(users); // This will log the form data as an object
         // You can now send `data` to your server or handle it as needed
@@ -49,6 +55,7 @@ const Register = () => {
             <div className="custom-bg bg-cover w-7/12 h-10/12 text-white relative">
                 <div className="flex form_flex">
                     <div className="bg-white p-2 md:w-[500px] w-full h-[600px]">
+
                         <form onSubmit={handleSubmit} className="block sign_in mx-auto">
                             <div className="w-full bg-white p-3 md:rounded-l-0 rounded-l-lg rounded-r-lg flex items-center justify-center text-gray-950 text-center relative">
                                 <div className="p-5">
@@ -68,7 +75,12 @@ const Register = () => {
                                             Fuga veniam ea minima vitae.
                                         </div>
                                     </div>
-                                    <div className="relative mb-2">
+                                    <div className='flex items-center justify-center gap-10 my-5 brandFont text-lg'>
+                                        {/* <p onClick={() => setUses("admin")} className={`cursor-pointer ${uses === "admin" ? "border-b-2 border-green-500 text-green-500 font-extrabold" : ""}`}>Admin</p> */}
+                                        <p onClick={() => setUses("agent-pending")} className={`cursor-pointer ${uses === "agent" ? "border-b-2 border-green-500 text-green-500 font-extrabold" : ""}`}>Agent</p>
+                                        <p onClick={() => setUses("user-pending")} className={`cursor-pointer ${uses === "user-pending" ? "border-b-2 border-green-500 text-green-500 font-extrabold" : ""}`}>User</p>
+                                    </div>
+                                    {/* <div className="relative mb-2">
                                         <select
                                             required
                                             name="role"
@@ -84,7 +96,7 @@ const Register = () => {
                                         >
                                             Role
                                         </label>
-                                    </div>
+                                    </div> */}
                                     <div className="mb-[40px]">
                                         <div className="relative mb-2">
                                             <input
